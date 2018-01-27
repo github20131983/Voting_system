@@ -1,0 +1,55 @@
+package com.wyj.util;
+
+import java.sql.Connection;			
+import java.sql.DriverManager;      
+import java.sql.PreparedStatement;  
+import java.sql.ResultSet;			
+import java.sql.SQLException;		
+
+public class DBconnection {
+	private static final String DBDRIVER="com.mysql.jdbc.Driver";
+	private static final String DBURL="jdbc:mysql://localhost:3306/db_votemanage";
+	private static final String DBUSER="wyj";
+	private static final String DBPASSWORD="20131983";
+
+	public static Connection getConnection(){
+		Connection conn = null;	
+		try {
+			Class.forName(DBDRIVER);
+			conn = DriverManager.getConnection(DBURL,DBUSER,DBPASSWORD);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}											
+		  catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return conn;
+	}
+	
+	public static void close(Connection conn){
+		if(conn!=null)
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
+	public static void close(PreparedStatement pstmt){
+		if(pstmt!=null)
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	public static void close(ResultSet rs){
+		if(rs!=null)
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+}

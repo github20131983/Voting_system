@@ -1,0 +1,17 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name> 
+  <filter>								<!--定义核心Filter FilterDispatcher -->
+		<filter-name>struts2</filter-name>	<!-- 定义核心Filter的名称 -->
+		<filter-class>						<!--定义核心Filter的实现类 -->
+			org.apache.struts2.dispatcher.FilterDispatcher
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name><!--核心Filter的名称 -->
+		<url-pattern>/*</url-pattern><!--使用该核心Filter过滤所有的Web请求 -->
+	</filter-mapping>
+</web-app>

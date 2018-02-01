@@ -4,9 +4,16 @@
  "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts><!-- 根节点 -->
 	<constant name="struts.i18n.encoding" value="utf-8"></constant>
-	<package name="struts2" extends="jfreechart-default">
+<!-- 	<package name="struts2" extends="jfreechart-default"> -->
+	<package name="struts2" extends="struts-default" >
  		<action name="addVote" class="com.wyj.action.AddVoteAction">
  			<result name="success">/admin/addVote.jsp</result>
+ 		</action> 
+ 		<action name="showVote" class="com.wyj.action.ShowVoteAction">
+ 			<result name="success">/admin/showVote.jsp</result>
+ 		</action>  	
+ 		<action name="deleteVote" class="com.wyj.action.DeleteVoteAction">
+ 			<result name="success" type="chain">showVote</result>
  		</action> 		
  	</package>	
 </struts>

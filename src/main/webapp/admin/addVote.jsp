@@ -19,16 +19,22 @@
  <script type="text/javascript" language="javascript">
 	var i = 4;
 	function addVoteOption(){
+    var x=document.getElementById("voteOptionList").getElementsByTagName("input");
+    var m = new Array()
+	for (var k=0;k<x.length;k++)m[k]=x[k].value;		
 		window.document.getElementById("voteOptionList").innerHTML=
 			window.document.getElementById("voteOptionList").innerHTML + 
 			"<label class=\"layui-form-label\" style=\"width:120px\">选项"+(i++)+"名称</label>"
-			+"<input type=\"text\" name=\"voteOption\" lay-verify=\"title\" autocomplete=\"off\" placeholder=\"输入\" class=\"layui-input\" style=\"width:180px;margin: 15px 0\">"; 
+			+"<input type=\"text\" name=\"voteOption\" lay-verify=\"title\" autocomplete=\"off\" placeholder=\"输入\" class=\"layui-input\" style=\"width:180px;margin: 15px 0\">";
+	var y=document.getElementById("voteOptionList").getElementsByTagName("input");	
+	for (var k=0;k<i-2;k++)
+	   y[k].value=m[k];			  
 	}
  </script>
 </head>
 <body>
 
-<form class="layui-form" action="addVote.action">
+<form class="layui-form" action="addVote.action" name="addForm" method="post">
 
   <div class="layui-form-item" >
     <label class="layui-form-label" style="width:120px">选择投票频道</label>
@@ -49,7 +55,7 @@
       	<input type="text" name="voteName" lay-verify="title" autocomplete="off" placeholder="输入" class="layui-input" style="width:180px;margin: 15px 150px">   
     </div>
  
-    <div id="voteOptionList"> 
+    <div id="voteOptionList" > 
         <label class="layui-form-label" style="width:120px">选项1名称</label>               
       	<input type="text" name="voteOption" lay-verify="title" autocomplete="off" placeholder="输入" class="layui-input" style="width:180px;margin: 15px 0">
       	<label class="layui-form-label" style="width:120px">选项2名称</label>

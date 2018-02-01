@@ -24,9 +24,8 @@
         <artifactId>struts2-core</artifactId>  
         <version>2.3.14</version>  
     </dependency>  
-    
- </dependencies>
- <build>
+  </dependencies>
+  <build>
     <finalName>Voting_system</finalName>
- </build>
+  </build>
 </project>

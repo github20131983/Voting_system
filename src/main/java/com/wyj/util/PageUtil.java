@@ -1,7 +1,7 @@
 package com.wyj.util;
 
 public class PageUtil {
-public static Page creatPage(int everyPage,int totalCount,int currentPage){
+public static Page createPage(int everyPage,int totalCount,int currentPage){
 	everyPage=getEveryPage(everyPage);
 	currentPage = getCurrentPage(currentPage);
 	int totalPage = getTotalPage(everyPage, totalCount);

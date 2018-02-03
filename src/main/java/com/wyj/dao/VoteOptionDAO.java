@@ -8,4 +8,6 @@ public interface VoteOptionDAO {
 	public void addVoteOption(VoteOption voteOption);		
 	public List<VoteOption> findVoteOptionByVoteID(int voteID);	
 	public void deleteVoteOption(int voteOptionID);
+	public void updateVoteOption(VoteOption voteOption);
+	public VoteOption findVoteOptionById(int voteOptionID);
 }

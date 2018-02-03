@@ -74,5 +74,49 @@ public class VoteOptionDAOImpl implements VoteOptionDAO{
 			DBconnection.close(conn);							
 		}
 	}
+
+	public void updateVoteOption(VoteOption voteOption) {
+		Connection conn = DBconnection.getConnection();	
+		String deleteSQL = "update tb_voteoption set ticketNum = ? where voteOptionID = ?";
+		PreparedStatement pstmt = null;					
+		try {
+			pstmt = conn.prepareStatement(deleteSQL);		
+			pstmt.setInt(1, voteOption.getTicketNum());		
+			pstmt.setInt(2, voteOption.getVoteOptionID());	
+			pstmt.executeUpdate();								
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBconnection.close(pstmt);							
+			DBconnection.close(conn);							
+		}		
+	}
+
+	public VoteOption findVoteOptionById(int voteOptionID) {
+		Connection conn = DBconnection.getConnection();		
+		String findByIDSQL = "select * from tb_voteoption where voteOptionID = ?";
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		VoteOption voteOption = null;
+		try {
+			pstmt = conn.prepareStatement(findByIDSQL);		
+			pstmt.setInt(1, voteOptionID);
+			rs = pstmt.executeQuery();						
+			if(rs.next()) {
+				voteOption = new VoteOption();
+				voteOption.setVoteOptionID(rs.getInt(1));
+				voteOption.setVoteID(rs.getInt(2));
+				voteOption.setVoteOptionName(rs.getString(3));
+				voteOption.setTicketNum(rs.getInt(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBconnection.close(rs);								
+			DBconnection.close(pstmt);							
+			DBconnection.close(conn);							
+		}
+		return voteOption;
+	}
 }
 

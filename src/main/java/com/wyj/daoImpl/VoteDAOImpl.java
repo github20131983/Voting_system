@@ -149,4 +149,57 @@ public Vote findVoteByName(String voteName) {
 	}
 	return vote;
 }
+
+public List<Vote> findVoteByChannel(Page page, int channelID) {
+	Connection conn = DBconnection.getConnection();		
+	String findByIDSQL = "select * from tb_vote where channelID=? limit ?,?";		
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	List<Vote> votes = new ArrayList<Vote>();
+	try {
+		pstmt = conn.prepareStatement(findByIDSQL);		
+		pstmt.setInt(1, channelID);
+		pstmt.setInt(2, page.getBeginIndex());
+		pstmt.setInt(3, page.getEveryPage());
+		rs = pstmt.executeQuery();						
+		while(rs.next()) {
+			Vote vote = new Vote();
+			vote.setVoteID(rs.getInt(1));
+			vote.setVoteName(rs.getString(2));
+			vote.setChannelID(rs.getInt(3));
+			votes.add(vote);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally{
+		DBconnection.close(rs);								
+		DBconnection.close(pstmt);							
+		DBconnection.close(conn);							
+	}
+	return votes;
+}
+
+public int findCountByChannel(int channelID) {
+	Connection conn = DBconnection.getConnection();	
+	String findSQL = "select count(*) from tb_vote where channelID=?";
+	PreparedStatement pstmt = null;					
+	ResultSet rs = null;
+	int count = 0;
+	try {
+		pstmt = conn.prepareStatement(findSQL);		
+		pstmt.setInt(1, channelID);
+		rs = pstmt.executeQuery();					
+		if(rs.next()) {
+			count = rs.getInt(1);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally{
+		DBconnection.close(rs);						
+		DBconnection.close(pstmt);					
+		DBconnection.close(conn);					
+	}
+	return count;
+}
+
 }

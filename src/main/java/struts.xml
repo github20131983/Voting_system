@@ -4,8 +4,8 @@
  "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts><!-- 根节点 -->
 	<constant name="struts.i18n.encoding" value="utf-8"></constant>
-<!-- 	<package name="struts2" extends="jfreechart-default"> -->
-	<package name="struts2" extends="struts-default" >
+    <package name="struts2" extends="jfreechart-default">
+<!--     <package name="struts2" extends="struts-default"> -->
  		<action name="addVote" class="com.wyj.action.AddVoteAction">
  			<result name="success">/admin/addVote.jsp</result>
  		</action> 
@@ -14,6 +14,20 @@
  		</action>  	
  		<action name="deleteVote" class="com.wyj.action.DeleteVoteAction">
  			<result name="success" type="chain">showVote</result>
- 		</action> 		
+ 		</action> 
+ 		<action name="showVoteByChannel" class="com.wyj.action.ShowVoteByChannelAction">
+ 			<result name="success">index.jsp</result>
+ 			<result name="input">index.jsp</result>
+ 		</action>
+  		<action name="voteResult" class="com.wyj.action.VoteResultAction"> 
+ 			<result name="success" type="chart">
+ 				<param name="width">400</param>
+ 				<param name="height">300</param>
+ 			</result>
+ 		</action>
+ 		<action name="doVote" class="com.wyj.action.DoVoteAction">
+ 			<result name="success" type="chain">voteResult</result>
+ 			<result name="input" type="chain">showVoteByChannel</result>
+ 		</action>		
  	</package>	
 </struts>

@@ -9,11 +9,7 @@
  
  <script src="../layui/layui.js" charset="utf-8"></script>
  <script>
- layui.use(['form'], function(){
-	  var form = layui.form
-	  ,layer = layui.layer
-	  ,layedit = layui.layedit
-	  ,laydate = layui.laydate; 
+ layui.use(['form'], function(){	 
 	});	  	 	 
  </script>
  <script type="text/javascript" language="javascript">

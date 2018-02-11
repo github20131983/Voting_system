@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,7 +14,6 @@ layui.use('form', function(){
 </script>
 </head>
 <body>
-
 <div>
 <ul class="layui-nav" style="padding:0 15%">
   <li class="layui-nav-item" style="margin:0 3%"><a href="showVoteByChannel.action?channelID=1">NBA</a></li>
@@ -35,21 +34,18 @@ layui.use('form', function(){
 	   <s:iterator value="#request.voteResultList" var="voteResult">
 	  	 <s:property value="#voteResult.vote.voteName"/>
 	        <form class="layui-form layui-form-pane1" action="doVote.action" method="post">
-<%-- 	          <s:iterator value="#voteResult.voteOptions" var="voteOption"> --%>
-<%-- 	          		<input type="radio" name="voteOptionID" value="voteOption.voteOptionID"><s:property value="#voteOption.voteOptionName"/><br> --%>
-<%-- 	          </s:iterator> --%>
-	        <input type="radio" name="voteOptionID" value="0">其它
+	          <s:iterator value="#voteResult.voteOptions" var="voteOption">
+	          		<input type="radio" name="voteOptionID" value=<s:property value="#voteOption.voteOptionID"/>><s:property value="#voteOption.voteOptionName"/><br>
+	          </s:iterator>
+	        <input type="radio" name="voteOptionID" value="0">其它<br>
 	        <input type="text" name="otherOption" lay-verify="title" autocomplete="off" placeholder="输入" class="layui-input" style="width:200px;margin:10px 0">
- 	        <input type="hidden" name="voteID" value="voteResult.vote.voteID"> 
- 	        <s:property value="#voteResult.vote.voteID"/>
-<!-- 	        <input type="hidden" name="channelID" value="#voteResult.vote.channelID"> -->
-<!--             <input type="hidden" name="voteID" value="53"> -->
-<!-- 	        <input type="hidden" name="channelID" value="2"> -->
-	        <s:url action="voteResult" var="urlTag" namespace="/admin">
+ 	        <input type="hidden" name="voteID" value=<s:property value="#voteResult.vote.voteID"/>>
+	        <input type="hidden" name="channelID" value=<s:property value="#voteResult.vote.channelID"/>>
+	        <s:url action="voteResult" var="urlTag">
                 <s:param name="voteID">
-                <s:property value="#request.voteResult.vote.voteID"/>
+                <s:property value="#voteResult.vote.voteID"/>
                  </s:param>
-                 </s:url> 
+             </s:url> 
              <s:a href="%{urlTag}">查看投票结果</s:a> 
 	         <br/>
 	         <button class="layui-btn" style="margin:10px 0px;" type="submit">投票</button>
@@ -59,8 +55,7 @@ layui.use('form', function(){
 	  
 	   <s:if test="#request.voteResultList.size == 0">
 	                     	没有任何投票内容!
-	    </s:if>
-	    
+	    </s:if>	    
            <div align="center" style="font-size: 12px">
 			<s:if test="#request.page.hasPrePage">
 			     <s:url action="showVoteByChannel.action" var="urlTag">

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="showVote.action">投票结果</a>
+<a href="addVote.jsp">新增投票</a>
+<a href="showVote.action">投票管理</a>
 </body>
 </html>

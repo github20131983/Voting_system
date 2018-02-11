@@ -5,7 +5,6 @@
 <struts><!-- 根节点 -->
 	<constant name="struts.i18n.encoding" value="utf-8"></constant>
     <package name="struts2" extends="jfreechart-default">
-<!--     <package name="struts2" extends="struts-default"> -->
  		<action name="addVote" class="com.wyj.action.AddVoteAction">
  			<result name="success">/admin/addVote.jsp</result>
  		</action> 
@@ -28,6 +27,6 @@
  		<action name="doVote" class="com.wyj.action.DoVoteAction">
  			<result name="success" type="chain">voteResult</result>
  			<result name="input" type="chain">showVoteByChannel</result>
- 		</action>		
+ 		</action>	
  	</package>	
 </struts>
